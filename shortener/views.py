@@ -1,9 +1,14 @@
+#!/usr/bin/env python
+""" views
+"""
 from django.shortcuts import render
 from .models import ShortUrl
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 # Create your views here.
 
 def index(request):
+    """ index route
+    """
     if request.method == "POST":
         data = request.POST
         name = data['name']
@@ -13,10 +18,11 @@ def index(request):
         print("Short URL created")
 
     context = {}
-    template = "polls/index.html"
+    template = "index.html"
     return render(request, template, context)
 
-def rerouter(request, slug):
-    url = ShortUrl.objects.get(slug=slug)
-
+def rerouter(request, name):
+    """ redirects urls
+    """
+    url = get_object_or_404(ShortUrl, name=name)
     return redirect(url.url)

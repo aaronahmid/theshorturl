@@ -7,6 +7,6 @@ from .api import endpoints
 app_name = 'shortener'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('api/', endpoints.Index, name='api_setURL'),
-    path('<slug:slug>/', views.rerouter, name='shorturl'),
+    path('api/shortener/', endpoints.Index, name='api_setURL'),
+    path('<str:name>/', views.rerouter, name='shorturl'),
 ]
