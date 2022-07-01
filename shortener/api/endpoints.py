@@ -1,3 +1,6 @@
+#!/usr/bin/env pyhton
+""" api endpoints
+"""
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,9 +11,12 @@ from rest_framework import permissions
 from shortener.models import ShortUrl
 from .serializer import ShortSerializer
 
+
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def Index(request):
+    """ index url endpoint
+    """
     serializer = ShortSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
